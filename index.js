@@ -14,11 +14,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: `https://document-highlighter-xott.vercel.app`,
+    // origin: `${process.env.CLIENT_URL}`,
+    // origin: "http://localhost:5173",
+    origin: "*",
     credentials: true,
   })
 );
-
 app.use(express.json());
 
 app.get("/", authMiddleware, (req, res) => {
