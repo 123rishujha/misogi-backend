@@ -6,7 +6,7 @@ const cors = require("cors");
 const { connection } = require("./config/db");
 //routes
 const { userRouter } = require("./routes/userRoutes");
-const { userBookRouter } = require("./routes/userBookRoutes");
+const { userLibraryRouter } = require("./routes/userLibraryRouter");
 const { awsRouter } = require("./routes/awsRoutes");
 const { authMiddleware } = require("./middlewares/authMiddleware");
 
@@ -22,13 +22,12 @@ app.use(
 app.use(express.json());
 
 app.get("/", authMiddleware, (req, res) => {
-  // console.log(req.user);
   res.json({ message: "working" });
 });
 
 //routes
 app.use("/api/user", userRouter);
-app.use("/api/book", userBookRouter);
+app.use("/api/library", userLibraryRouter);
 app.use("/api", awsRouter);
 
 app.use((err, req, res, next) => {

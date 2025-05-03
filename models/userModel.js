@@ -7,7 +7,6 @@ const userSchema = mongoose.Schema(
     password: {
       type: mongoose.Schema.Types.Mixed,
       required: true,
-      // unique: true,
     },
     photo: { type: String },
     role: { type: String, default: "user" },
