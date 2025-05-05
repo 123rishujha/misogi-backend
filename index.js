@@ -11,11 +11,11 @@ const { awsRouter } = require("./routes/awsRoutes");
 const { authMiddleware } = require("./middlewares/authMiddleware");
 
 const app = express();
-
+console.log("akf process.env.CLIENT_URL", process.env.CLIENT_URL);
 app.use(
   cors({
     origin: `${process.env.CLIENT_URL}`,
-    // credentials: true,
+    credentials: true,
   })
 );
 // app.use(cors());
