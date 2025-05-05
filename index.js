@@ -12,13 +12,13 @@ const { authMiddleware } = require("./middlewares/authMiddleware");
 
 const app = express();
 
-// app.use(
-//   cors({
-//     origin: "https://document-highlighter-xott.vercel.app/",
-//     // credentials: true,
-//   })
-// );
-app.use(cors());
+app.use(
+  cors({
+    origin: `${process.env.CLIENT_URL}`,
+    // credentials: true,
+  })
+);
+// app.use(cors());
 
 app.use(express.json());
 
