@@ -26,7 +26,7 @@ app.use(
 
 app.use(express.json());
 
-app.get("/", authMiddleware, (req, res) => {
+app.get("/api", authMiddleware, (req, res) => {
   res.json({ message: "working" });
 });
 
