@@ -7,6 +7,7 @@ const {
   logoutController,
   getAllUsers,
   getUser,
+  getAllLibrarians,
 } = require("../controllers/userControllers");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 
@@ -20,6 +21,10 @@ userRouter.post("/logout", authMiddleware, logoutController);
 
 //get users -> /api/user/
 userRouter.get("/", authMiddleware, getAllUsers);
+
+//get users librarians -> /api/user/
+userRouter.get("/all-libraries", authMiddleware, getAllLibrarians);
+
 //get single user -> /api/user/profile
 userRouter.get("/profile/:userId", authMiddleware, getUser);
 

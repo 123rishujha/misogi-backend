@@ -9,7 +9,12 @@ const userSchema = mongoose.Schema(
       required: true,
     },
     photo: { type: String },
-    role: { type: String, default: "user" },
+    // role: { type: String, default: "user" },
+    role: {
+      type: String,
+      enum: ["member", "librarian"],
+      default: "member",
+    },
   },
   {
     timestamps: true,

@@ -1,12 +1,14 @@
+require("dotenv").config();
+
 const { UserModel } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // REGISTER
 const registerController = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !role) {
     return next(new Error("Please fill all the fields"));
   }
 
@@ -24,12 +26,13 @@ const registerController = async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     await newUser.save();
     res.json({
       success: true,
-      msg: "Registration successful",
+      msg: "Registration successful.",
     });
   } catch (err) {
     console.log("Error in registerController:", err);
@@ -147,10 +150,27 @@ const getUser = async (req, res, next) => {
   }
 };
 
+const getAllLibrarians = async (req, res, next) => {
+  try {
+    const librarians = await UserModel.find({ role: "librarian" }).select(
+      "-password"
+    );
+
+    res.json({
+      success: true,
+      data: librarians,
+    });
+  } catch (err) {
+    console.log("Error in getAllLibrarians:", err);
+    return next(err);
+  }
+};
+
 module.exports = {
   registerController,
   loginController,
   logoutController,
   getAllUsers,
   getUser,
+  getAllLibrarians,
 };
